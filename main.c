@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-char codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int altura, int largura){
+void codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int altura, int largura){
     //define uma variável para armazenar a cor do primeiro pixel da imagem e usá-lo como padrão na verificação
     int cor_base = imagem[linha_inicio][coluna_inicio];
 
@@ -73,6 +73,7 @@ char codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
             int largura_direita = (largura / 2)
         }
         //chama a função de novo e calcula para os 4 quadrantes em ordem (sup. esq; sup. dir; inf. esq; inf. dir)
+        //para achar as linhas novas temos que fazer somas 
         //primeiro quadrante: codificador()
     }
 }
