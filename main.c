@@ -75,9 +75,13 @@ void codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
         //chama a função de novo e calcula para os 4 quadrantes em ordem (sup. esq; sup. dir; inf. esq; inf. dir)
         //para achar as linhas novas temos que fazer somas da linha inicial com as alturas superior ou inferior e largura direita ou esquerda
         //primeiro quadrante: codificador(linha inicial, coluna inicial, altura superior, largura esquerda)
+        codificador(linha_inicio, coluna_inicio, altura_superior, largura_esquerda);
         //segundo quadrante: codificador(linha inicial, coluna inicial+largura esquerda, altura superior, largura direita)
+        codificador(linha_inicio, coluna_inicio + largura_esquerda, altura_superior, largura_direita);
         //terceiro quadrante: codificador(linha inicial+altura superior, coluna inicial, altura inferior, largura esquerda)
+        codificador(linha_inicio + altura_superior, coluna_inicio, altura_inferior, largura_esquerda);
         //quarto quadrante: codificador(linha inicial+altura superior, coluna inicial+largura esquerda, altura inferior, largura direita)
+        codificador(linha_inicio + altura_superior, coluna_inicio + largura_esquerda, altura_inferior, largura_direita);
 
     }
 }
