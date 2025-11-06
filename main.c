@@ -42,7 +42,7 @@ char codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
         
         //Calcula os pontos de divisão (esquerda fica com uma coluna a mais e superior fica com uma linha a mais em caso de ímpar)
         //verifica se o resto da divisão da altura por 2 é diferente de 0
-        if (altura / 2 != 0){
+        if (altura % 2 != 0){
             //sendo diferente de 0, então a altura é impar
             //define variavel nova: altura superior (ela é igual a altura total dividida por 2 + 1)
             int altura_superior = (altura / 2) + 1
@@ -60,7 +60,7 @@ char codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
 
         //verifica se o resto da divisão da largura por 2 é diferente de 0
             //sendo diferente de 0, então a altura é impar
-        if (largura / 2 != 0){
+        if (largura % 2 != 0){
             //define variavel nova: largura esquerda (ela é igual a largura total dividida por 2 + 1)
             int largura_esquerda = (largura / 2) + 1
             //define variavel nova: largura direita (ela é igual a largura total dividida por 2)
@@ -73,6 +73,7 @@ char codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
             int largura_direita = (largura / 2)
         }
         //chama a função de novo e calcula para os 4 quadrantes em ordem (sup. esq; sup. dir; inf. esq; inf. dir)
+        //primeiro quadrante: codificador()
     }
 }
 
