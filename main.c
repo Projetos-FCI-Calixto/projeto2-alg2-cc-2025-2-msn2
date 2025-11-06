@@ -39,9 +39,26 @@ char codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
     }else{ //se não é uniforme
         //retorna X
         printf("X");
-
+        
         //Calcula os pontos de divisão (esquerda fica com uma coluna a mais e superior fica com uma linha a mais em caso de ímpar)
+        //verifica se o resto da divisão da altura por 2 é diferente de 0
+            //sendo diferente de 0, então a altura é impar e divisão é diferente
+            //define variavel nova: altura superior (ela é igual a altura total dividida por 2 + o resto)
+            //define variavel nova: altura inferior (ela é igual a altura total dividida por 2)
 
+        //o resto sendo 0, altura total é par
+            //define variavel nova: altura superior (ela é igual a altura total dividida por 2)
+            //define variavel nova: altura inferior (ela é igual a altura total dividida por 2)
+
+        //verifica se o resto da divisão da largura por 2 é diferente de 0
+            //sendo diferente de 0, então a altura é impar e divisão é diferente
+            //define variavel nova: largura esquerda (ela é igual a largura total dividida por 2 + o resto)
+            //define variavel nova: largura direita (ela é igual a largura total dividida por 2)
+
+        //o resto sendo 0, largura total é par
+            //define variavel nova: largura esquerda (ela é igual a largura total dividida por 2)
+            //define variavel nova: largura direita (ela é igual a largura total dividida por 2)
+                      
         //chama a função de novo e calcula para os 4 quadrantes em ordem (sup. esq; sup. dir; inf. esq; inf. dir)
 
     }
