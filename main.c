@@ -2,6 +2,10 @@
 #include <string.h>
 
 void codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int altura, int largura){
+    //no caso de uma divisão de imagem que fique sem altura inferior ou largura direita, vamos parar a função
+    if(altura = 0 || largura = 0){
+        return;
+    }
     //define uma variável para armazenar a cor do primeiro pixel da imagem e usá-lo como padrão na verificação
     int cor_base = imagem[linha_inicio][coluna_inicio];
 
@@ -45,32 +49,30 @@ void codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
         if (altura % 2 != 0){
             //sendo diferente de 0, então a altura é impar
             //define variavel nova: altura superior (ela é igual a altura total dividida por 2 + 1)
-            int altura_superior = (altura / 2) + 1
+            int altura_superior = (altura / 2) + 1;
             //define variavel nova: altura inferior (ela é igual a altura total dividida por 2)
-            int altura_inferior = (altura / 2)
+            int altura_inferior = (altura / 2);
         } else {
             //o resto sendo 0, altura total é par
             //define variavel nova: altura superior (ela é igual a altura total dividida por 2)
-            int altura_superior = (altura / 2)
+            int altura_superior = (altura / 2);
             //define variavel nova: altura inferior (ela é igual a altura total dividida por 2)
-            int altura_inferior = (altura / 2)
+            int altura_inferior = (altura / 2);
         }
-
-        
 
         //verifica se o resto da divisão da largura por 2 é diferente de 0
             //sendo diferente de 0, então a altura é impar
         if (largura % 2 != 0){
             //define variavel nova: largura esquerda (ela é igual a largura total dividida por 2 + 1)
-            int largura_esquerda = (largura / 2) + 1
+            int largura_esquerda = (largura / 2) + 1;
             //define variavel nova: largura direita (ela é igual a largura total dividida por 2)
-            int largura_direita = (largura / 2)
+            int largura_direita = (largura / 2);
         } else {
         //o resto sendo 0, largura total é par
             //define variavel nova: largura esquerda (ela é igual a largura total dividida por 2)
-            int largura_esquerda = (largura / 2)
+            int largura_esquerda = (largura / 2);
             //define variavel nova: largura direita (ela é igual a largura total dividida por 2)
-            int largura_direita = (largura / 2)
+            int largura_direita = (largura / 2);
         }
         //chama a função de novo e calcula para os 4 quadrantes em ordem (sup. esq; sup. dir; inf. esq; inf. dir)
         //para achar as linhas novas temos que fazer somas da linha inicial com as alturas superior ou inferior e largura direita ou esquerda
