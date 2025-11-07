@@ -88,6 +88,16 @@ void codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
     }
 }
 
+//função void para menu de ajuda
+void ajuda(){
+    printf("Uso: ImageEncoder [-? | -m | -f ARQ]\n");
+    printf("Codifica imagens binárias dadas em arquivos PBM ou por dados informados manualmente.\n");
+    printf("Argumentos:\n");
+    printf("-?, --help : apresenta essa orientação na tela.\n");
+    printf("-m, --manual: ativa o modo de entrada manual, em que o usuário fornece todos os dados da imagem informando-os através do teclado.\n");
+    printf("-f, -file: considera a imagem representada no arquivo PBM (Portable bitmap).\n");
+    return;
+}
 
 int main(){
     //uso de uma matriz imagem[][] para armazenar a imagem
