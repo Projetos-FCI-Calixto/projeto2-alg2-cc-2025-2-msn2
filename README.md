@@ -8,3 +8,8 @@
 
 - Enunciado do projeto em PDF (pasta /pdf)
 - Arquivos PBM para teste (pasta /testes)
+
+## Nomes e RA's
+- Pedro Araujo Botelho, RA: 10738317 - botelh00
+- Pedro Nicoletti Galante, RA:10436275 - BIG-lab0
+- Daniel Arais Motta, RA: 10419718 - DanielArais
