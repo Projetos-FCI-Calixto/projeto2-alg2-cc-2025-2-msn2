@@ -3,7 +3,7 @@
 
 void codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int altura, int largura){
     //no caso de uma divisão de imagem que fique sem altura inferior ou largura direita, vamos parar a função
-    if(altura = 0 || largura = 0){
+    if(altura == 0 || largura == 0){
         return;
     }
     //define uma variável para armazenar a cor do primeiro pixel da imagem e usá-lo como padrão na verificação
@@ -43,21 +43,24 @@ void codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
     }else{ //se não é uniforme
         //retorna X
         printf("X");
+        //declara as variáveis para novas alturas e alturas;
+        int altura_superior, altura_inferior;
+        int largura_esquerda, largura_direita;
         
         //Calcula os pontos de divisão (esquerda fica com uma coluna a mais e superior fica com uma linha a mais em caso de ímpar)
         //verifica se o resto da divisão da altura por 2 é diferente de 0
         if (altura % 2 != 0){
             //sendo diferente de 0, então a altura é impar
-            //define variavel nova: altura superior (ela é igual a altura total dividida por 2 + 1)
-            int altura_superior = (altura / 2) + 1;
-            //define variavel nova: altura inferior (ela é igual a altura total dividida por 2)
-            int altura_inferior = (altura / 2);
+            //altura superior (ela é igual a altura total dividida por 2 + 1)
+            altura_superior = (altura / 2) + 1;
+            //altura inferior (ela é igual a altura total dividida por 2)
+            altura_inferior = (altura / 2);
         } else {
             //o resto sendo 0, altura total é par
-            //define variavel nova: altura superior (ela é igual a altura total dividida por 2)
-            int altura_superior = (altura / 2);
-            //define variavel nova: altura inferior (ela é igual a altura total dividida por 2)
-            int altura_inferior = (altura / 2);
+            //altura superior (ela é igual a altura total dividida por 2)
+            altura_superior = (altura / 2);
+            //altura inferior (ela é igual a altura total dividida por 2)
+            altura_inferior = (altura / 2);
         }
 
         //verifica se o resto da divisão da largura por 2 é diferente de 0
@@ -77,13 +80,13 @@ void codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
         //chama a função de novo e calcula para os 4 quadrantes em ordem (sup. esq; sup. dir; inf. esq; inf. dir)
         //para achar as linhas novas temos que fazer somas da linha inicial com as alturas superior ou inferior e largura direita ou esquerda
         //primeiro quadrante: codificador(linha inicial, coluna inicial, altura superior, largura esquerda)
-        codificador(linha_inicio, coluna_inicio, altura_superior, largura_esquerda);
+        codificador(imagem, linha_inicio, coluna_inicio, altura_superior, largura_esquerda);
         //segundo quadrante: codificador(linha inicial, coluna inicial+largura esquerda, altura superior, largura direita)
-        codificador(linha_inicio, coluna_inicio + largura_esquerda, altura_superior, largura_direita);
+        codificador(imagem, linha_inicio, coluna_inicio + largura_esquerda, altura_superior, largura_direita);
         //terceiro quadrante: codificador(linha inicial+altura superior, coluna inicial, altura inferior, largura esquerda)
-        codificador(linha_inicio + altura_superior, coluna_inicio, altura_inferior, largura_esquerda);
+        codificador(imagem, linha_inicio + altura_superior, coluna_inicio, altura_inferior, largura_esquerda);
         //quarto quadrante: codificador(linha inicial+altura superior, coluna inicial+largura esquerda, altura inferior, largura direita)
-        codificador(linha_inicio + altura_superior, coluna_inicio + largura_esquerda, altura_inferior, largura_direita);
+        codificador(imagem, linha_inicio + altura_superior, coluna_inicio + largura_esquerda, altura_inferior, largura_direita);
 
     }
 }
@@ -99,7 +102,11 @@ void ajuda(){
     return;
 }
 
-int main(){
+int main(int argc, char *argv[]){
+    //verifica se a entrada na linha de comando de execução do código é vazia, -? ou --help e chama a função para o menu de ajuda
+    if(argc == 1 || strcmp(argv[1], "-?") == 0 || strcmp(argv[1], "--help") == 0){
+        ajuda();
+    }
     //uso de uma matriz imagem[][] para armazenar a imagem
     return 0;
 }
