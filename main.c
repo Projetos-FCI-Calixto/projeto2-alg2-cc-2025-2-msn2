@@ -2,26 +2,6 @@
 #include <string.h>
 #include <ctype.h>
 
-//Função para pular espaços, quebras de linha e comentários
-void ignorar_comentarios_e_espacos(FILE *f) {
-    int c;
-    //Loop para ler caracteres
-    while ((c = fgetc(f)) != EOF) { //fgetc lê um caractere
-        if (isspace(c)) {
-            continue; //ignora espaço e continua
-        }
-        else if (c == '#') { //Se for um comentario, ignora ate o final da linha
-            while ((c = fgetc(f)) != EOF && c != '\n');
-            continue; // Volta ao inicio do loop
-        }
-        else {
-            //Se não for espaço nem comentario, devolve o caractere pro "Buffer"
-            ungetc(c, f);
-            break; // Para o loop
-        }
-    }
-}
-
 //declaração da altura, largura e matriz para a imagem de forma global
 int imagem[1024][768];
 int largura = 0;
@@ -127,6 +107,27 @@ void ajuda(){
     printf("-f, -file: considera a imagem representada no arquivo PBM (Portable bitmap).\n");
     return;
 }
+
+//Função para pular espaços, quebras de linha e comentários
+void ignorar_comentarios_e_espacos(FILE *f) {
+    int c;
+    //Loop para ler caracteres
+    while ((c = fgetc(f)) != EOF) { //fgetc lê um caractere
+        if (isspace(c)) {
+            continue; //ignora espaço e continua
+        }
+        else if (c == '#') { //Se for um comentario, ignora ate o final da linha
+            while ((c = fgetc(f)) != EOF && c != '\n');
+            continue; // Volta ao inicio do loop
+        }
+        else {
+            //Se não for espaço nem comentario, devolve o caractere pro "Buffer"
+            ungetc(c, f);
+            break; // Para o loop
+        }
+    }
+}
+
 //função para ler o arquivo
 int modo_arquivo(char *nome_arquivo){
     //tenta abrir o arquivo
@@ -183,32 +184,30 @@ int modo_arquivo(char *nome_arquivo){
     return 1; //Funcionou
 }
 
-
-//Modo Manual(Simplificado) 
-//Não precisa mais de parâmetros e não usa ponteiros
-
-into modo_manual(){
+//Modo Manual
+int modo_manual(){
     printf("Modo de Entrada Manual\n");
     printf("Digite a largura da imagem");
 
-//Lê e salva diretamente na variável global 
+    //Lê e salva diretamente na variável global 
 
     scanf("%d",&altura);
 
-//Validação de segurança 
+    //Validação de segurança 
 
-if (largura > 1024 || altura > 468{
+    if (largura > 1024 || altura > 468{
     printf("Erro: Dimensões excedem o limite máximo de 1024x768.\n");
     return 0; //Retorna 0 (falha)
-}
+    }
 
-printf("Digite os pixels da imagem(0 para branco, 1 para preto):\n");
-for(int i = 0; i < altura; i++){
-    for(int j = 0; j < largura; j++){
-        scanf("%d",&imagem[i][i]);
+    printf("Digite os pixels da imagem(0 para branco, 1 para preto):\n");
+    for(int i = 0; i < altura; i++){
+        for(int j = 0; j < largura; j++){
+            scanf("%d",&imagem[i][i]);
         }
     }
-return 1; \\Retorna 1 (Sucesso)
+    //Retorna 1 (Sucesso)
+    return 1;
 }
     
 int main(int argc, char *argv[]){
