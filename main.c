@@ -202,8 +202,15 @@ if (largura > 1024 || altura > 468{
     return 0; //Retorna 0 (falha)
 }
 
-
-
+printf("Digite os pixels da imagem(0 para branco, 1 para preto):\n");
+for(int i = 0; i < altura; i++){
+    for(int j = 0; j < largura; j++){
+        scanf("%d",&imagem[i][i]);
+        }
+    }
+return 1; \\Retorna 1 (Sucesso)
+}
+    
 int main(int argc, char *argv[]){
 
     //variável de verificação para os dados. Começa em 0, caso os dados tenham sido carregados corretamenta torna-se 1.
