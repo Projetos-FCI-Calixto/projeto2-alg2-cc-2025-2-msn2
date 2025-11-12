@@ -193,7 +193,16 @@ into modo_manual(){
 
 //Lê e salva diretamente na variável global 
 
-    scanf("%d",&altura_global);
+    scanf("%d",&altura);
+
+//Validação de segurança 
+
+if (largura > 1024 || altura > 468{
+    printf("Erro: Dimensões excedem o limite máximo de 1024x768.\n");
+    return 0; //Retorna 0 (falha)
+}
+
+
 
 int main(int argc, char *argv[]){
 
