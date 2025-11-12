@@ -1,5 +1,26 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+
+//Função para pular espaços, quebras de linha e comentários
+void ignorar_comentarios_e_espacos(FILE *f) {
+    int c;
+    //Loop para ler caracteres
+    while ((c = fgetc(f)) != EOF) { //fgetc lê um caractere
+        if (isspace(c)) {
+            continue; //ignora espaço e continua
+        }
+        else if (c == '#') { //Se for um comentario, ignora ate o final da linha
+            while ((c = fgetc(f)) != EOF && c != '\n');
+            continue; // Volta ao inicio do loop
+        }
+        else {
+            //Se não for espaço nem comentario, devolve o caractere pro "Buffer"
+            ungetc(c, f);
+            break; // Para o loop
+        }
+    }
+}
 
 //declaração da altura, largura e matriz para a imagem de forma global
 int imagem[1024][768];
@@ -105,6 +126,61 @@ void ajuda(){
     printf("-m, --manual: ativa o modo de entrada manual, em que o usuário fornece todos os dados da imagem informando-os através do teclado.\n");
     printf("-f, -file: considera a imagem representada no arquivo PBM (Portable bitmap).\n");
     return;
+}
+//função para ler o arquivo
+int modo_arquivo(char *nome_arquivo){
+    //tenta abrir o arquivo
+    FILE *arquivo = fopen(nome_arquivo, "r");
+    if (arquivo == NULL) {
+        printf("Erro: Nao foi possivel abrir o arquivo '%s'\n", nome_arquivo);
+        return 0; //ocorreu uma falha
+    }
+
+    // Lê e verifica o "Magic Number"
+    char magic[3];
+    fscanf(arquivo, "%s", magic);
+    if (strcmp(magic, "P1") != 0) {
+        printf("Erro: Arquivo nao esta no formato PBM");
+        fclose(arquivo);
+        return 0; //Falha
+    }
+
+    // Usa a função auxiliar para pular comentarios e espaços
+    ignorar_comentarios_e_espacos(arquivo);
+
+    //Lê as dimensões
+    if (fscanf(arquivo, "%d %d", &largura_global, &altura_global) != 2) {
+        printf("Erro: Dimensoes do arquvo invalidas.\n");
+        fclose(arquivo);
+        return 0;//Falha
+    }
+
+    //Valida as dimensões
+    if (largura_global > 1024 || altura_global > 768) {
+        printf("Erro: Dimensoes (%dx%d) excedem o limite de 1024x768.\n", largura_global, altura_global);
+        fclose(arquivo);
+        return 0; //Falha
+    }
+    
+    //Usando a função auxiliar novamente, caso tenha mais comentários
+    ignorar_comentarios_e_espacos(arquivo);
+
+    //Lê os dados dos pixels
+    for (int i = o; i < altura_global; i++) {
+        for (int j = 0; j < largura_global; j++) {
+            //utilizando o fscanf facilita o codigo pois ele já ignora espaços entre os números
+            if (fscanf(arquivo, "%d", &imagem[i][j]) != 1) {
+                printf("Erro: Arquivo PBM corrompido ou incompleto.\n");
+                fclose(arquivo);
+                return 0; //Falha
+            }
+        }
+    }
+
+    //Funcionou
+    fclose(arquivo);
+    printf("Arquivo '%s' lido com sucesso (%dx%d).\n", nome_arquivo, largura_global, altura_global);
+    return 1; //Funcionou
 }
 
 int main(int argc, char *argv[]){
