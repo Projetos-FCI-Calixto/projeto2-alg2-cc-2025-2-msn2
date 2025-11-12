@@ -183,6 +183,18 @@ int modo_arquivo(char *nome_arquivo){
     return 1; //Funcionou
 }
 
+
+//Modo Manual(Simplificado) 
+//Não precisa mais de parâmetros e não usa ponteiros
+
+into modo_manual(){
+    printf("Modo de Entrada Manual\n");
+    printf("Digite a largura da imagem");
+
+//Lê e salva diretamente na variável global 
+
+    scanf("%d",&altura_global);
+
 int main(int argc, char *argv[]){
 
     //variável de verificação para os dados. Começa em 0, caso os dados tenham sido carregados corretamenta torna-se 1.
