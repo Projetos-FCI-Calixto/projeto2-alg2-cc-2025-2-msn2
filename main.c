@@ -195,7 +195,7 @@ int modo_manual(){
 
     //Validação de segurança 
 
-    if (largura > 1024 || altura > 468{
+    if(largura > 1024 || altura > 768){
     printf("Erro: Dimensões excedem o limite máximo de 1024x768.\n");
     return 0; //Retorna 0 (falha)
     }
@@ -219,10 +219,10 @@ int main(int argc, char *argv[]){
     if(argc == 1 || strcmp(argv[1], "-?") == 0 || strcmp(argv[1], "--help") == 0){
         ajuda();
     }
-    else if(strcmp(argv[1], "-m") == 0 || strcmp(argv[1], "--manual") == 0)){
+    else if(strcmp(argv[1], "-m") == 0 || strcmp(argv[1], "--manual") == 0){
         dados_carregados = modo_manual();
     }
-    else if(strcmp(argv[1], "-f") == 0 || strcmp(argv[1], "--file") == 0)){
+    else if(strcmp(argv[1], "-f") == 0 || strcmp(argv[1], "--file") == 0){
         if(argc<3){
             printf("Erro: Nome do arquivo faltando apos o argumento -f.\n");
             ajuda();
@@ -230,8 +230,7 @@ int main(int argc, char *argv[]){
         else{
             dados_carregados = modo_arquivo(argv[2]);
         }
-    }
-    else{
+    } else{
         printf("ERRO: argumento inválido\n");
         ajuda();
     }
