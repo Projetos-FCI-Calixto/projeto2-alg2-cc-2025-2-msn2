@@ -190,8 +190,8 @@ int modo_manual(){
     printf("Digite a largura da imagem ");
     //Lê e salva diretamente na variável global 
     scanf("%d",&largura);
-    printf("Digite a altura da imagem ")
-    scanf("%d", &altura)
+    printf("Digite a altura da imagem ");
+    scanf("%d", &altura);
 
     //Validação de segurança 
 
