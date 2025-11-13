@@ -150,15 +150,15 @@ int modo_arquivo(char *nome_arquivo){
     ignorar_comentarios_e_espacos(arquivo);
 
     //Lê as dimensões
-    if (fscanf(arquivo, "%d %d", &largura_global, &altura_global) != 2) {
+    if (fscanf(arquivo, "%d %d", &largura, &altura) != 2) {
         printf("Erro: Dimensoes do arquvo invalidas.\n");
         fclose(arquivo);
         return 0;//Falha
     }
 
     //Valida as dimensões
-    if (largura_global > 1024 || altura_global > 768) {
-        printf("Erro: Dimensoes (%dx%d) excedem o limite de 1024x768.\n", largura_global, altura_global);
+    if (largura > 1024 || altura > 768) {
+        printf("Erro: Dimensoes (%dx%d) excedem o limite de 1024x768.\n", largura, altura);
         fclose(arquivo);
         return 0; //Falha
     }
@@ -167,8 +167,8 @@ int modo_arquivo(char *nome_arquivo){
     ignorar_comentarios_e_espacos(arquivo);
 
     //Lê os dados dos pixels
-    for (int i = o; i < altura_global; i++) {
-        for (int j = 0; j < largura_global; j++) {
+    for (int i = o; i < altura; i++) {
+        for (int j = 0; j < largura; j++) {
             //utilizando o fscanf facilita o codigo pois ele já ignora espaços entre os números
             if (fscanf(arquivo, "%d", &imagem[i][j]) != 1) {
                 printf("Erro: Arquivo PBM corrompido ou incompleto.\n");
@@ -180,7 +180,7 @@ int modo_arquivo(char *nome_arquivo){
 
     //Funcionou
     fclose(arquivo);
-    printf("Arquivo '%s' lido com sucesso (%dx%d).\n", nome_arquivo, largura_global, altura_global);
+    printf("Arquivo '%s' lido com sucesso (%dx%d).\n", nome_arquivo, largura, altura);
     return 1; //Funcionou
 }
 
@@ -218,6 +218,28 @@ int main(int argc, char *argv[]){
     //verifica se a entrada na linha de comando de execução do código é vazia, -? ou --help e chama a função para o menu de ajuda
     if(argc == 1 || strcmp(argv[1], "-?") == 0 || strcmp(argv[1], "--help") == 0){
         ajuda();
+    }
+    else if(strcmp(argv[1], "-m") == 0 || strcmp(argv[1], "--manual") == 0)){
+        dados_carregados = modo_manual();
+    }
+    else if(strcmp(argv[1], "-f") == 0 || strcmp(argv[1], "--file") == 0)){
+        if(argc<3){
+            printf("Erro: Nome do arquivo faltando apos o argumento -f.\n");
+            ajuda();
+        }
+        else{
+            dados_carregados = modo_arquivo(argv[2]);
+        }
+    }
+    else{
+        printf("ERRO: argumento inválido\n");
+        ajuda();
+    }
+
+    if(dados_carregados == 1){
+        printf("Código Gerado\n");
+        codificador(imagem, 0, 0, altura, largura);
+        printf("\n");
     }
     //uso de uma matriz imagem[][] para armazenar a imagem
     return 0;
