@@ -73,15 +73,15 @@ void codificador(int imagem[1024][768], int linha_inicio, int coluna_inicio, int
             //sendo diferente de 0, então a altura é impar
         if (largura % 2 != 0){
             //define variavel nova: largura esquerda (ela é igual a largura total dividida por 2 + 1)
-            int largura_esquerda = (largura / 2) + 1;
+            largura_esquerda = (largura / 2) + 1;
             //define variavel nova: largura direita (ela é igual a largura total dividida por 2)
-            int largura_direita = (largura / 2);
+            largura_direita = (largura / 2);
         } else {
         //o resto sendo 0, largura total é par
             //define variavel nova: largura esquerda (ela é igual a largura total dividida por 2)
-            int largura_esquerda = (largura / 2);
+            largura_esquerda = (largura / 2);
             //define variavel nova: largura direita (ela é igual a largura total dividida por 2)
-            int largura_direita = (largura / 2);
+            largura_direita = (largura / 2);
         }
         //chama a função de novo e calcula para os 4 quadrantes em ordem (sup. esq; sup. dir; inf. esq; inf. dir)
         //para achar as linhas novas temos que fazer somas da linha inicial com as alturas superior ou inferior e largura direita ou esquerda
@@ -167,7 +167,7 @@ int modo_arquivo(char *nome_arquivo){
     ignorar_comentarios_e_espacos(arquivo);
 
     //Lê os dados dos pixels
-    for (int i = o; i < altura; i++) {
+    for (int i = 0; i < altura; i++) {
         for (int j = 0; j < largura; j++) {
             //utilizando o fscanf facilita o codigo pois ele já ignora espaços entre os números
             if (fscanf(arquivo, "%d", &imagem[i][j]) != 1) {
@@ -187,11 +187,11 @@ int modo_arquivo(char *nome_arquivo){
 //Modo Manual
 int modo_manual(){
     printf("Modo de Entrada Manual\n");
-    printf("Digite a largura da imagem");
-
+    printf("Digite a largura da imagem ");
     //Lê e salva diretamente na variável global 
-
-    scanf("%d",&altura);
+    scanf("%d",&largura);
+    printf("Digite a altura da imagem ")
+    scanf("%d", &altura)
 
     //Validação de segurança 
 
@@ -203,7 +203,7 @@ int modo_manual(){
     printf("Digite os pixels da imagem(0 para branco, 1 para preto):\n");
     for(int i = 0; i < altura; i++){
         for(int j = 0; j < largura; j++){
-            scanf("%d",&imagem[i][i]);
+            scanf("%d",&imagem[i][j]);
         }
     }
     //Retorna 1 (Sucesso)
